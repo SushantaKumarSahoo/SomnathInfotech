@@ -1,15 +1,17 @@
+import React, { Suspense } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustBar from './components/TrustBar';
 import Services from './components/Services';
-import PCBuilds from './components/PCBuilds';
-import Stats from './components/Stats';
-import Process from './components/Process';
-import Accessories from './components/Accessories';
-import About from './components/About';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+const PCBuilds = React.lazy(() => import('./components/PCBuilds'));
+const Stats = React.lazy(() => import('./components/Stats'));
+const Process = React.lazy(() => import('./components/Process'));
+const Accessories = React.lazy(() => import('./components/Accessories'));
+const About = React.lazy(() => import('./components/About'));
+const Contact = React.lazy(() => import('./components/Contact'));
+const Footer = React.lazy(() => import('./components/Footer'));
 
 export default function App() {
   return (
@@ -20,14 +22,18 @@ export default function App() {
           <Hero />
           <TrustBar />
           <Services />
-          <PCBuilds />
-          <Stats />
-          <Process />
-          <Accessories />
-          <About />
-          <Contact />
+          <Suspense fallback={<div className="h-32 w-full"></div>}>
+            <PCBuilds />
+            <Stats />
+            <Process />
+            <Accessories />
+            <About />
+            <Contact />
+          </Suspense>
         </main>
-        <Footer />
+        <Suspense fallback={<div className="h-32 w-full"></div>}>
+          <Footer />
+        </Suspense>
       </div>
     </ThemeProvider>
   );

@@ -1,5 +1,5 @@
-const LOGO_DARK_URL = "/logo-dark.png";
-const LOGO_LIGHT_URL = "/logo-light.png";
+const LOGO_DARK_URL = "/logo-dark.webp";
+const LOGO_LIGHT_URL = "/logo-light.webp";
 
 export const siteData = {
   brand: {

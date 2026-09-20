@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^13.4.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-countup": "^6.5.3",
+    "react-dom": "^19.2.8",
+    "react-intersection-observer": "^11.0.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -19,6 +22,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.0"
   }
