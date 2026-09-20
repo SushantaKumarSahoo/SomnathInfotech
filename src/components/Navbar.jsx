@@ -10,26 +10,29 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      const sections = siteData.nav.map(n => n.href.slice(1)).reverse();
+      const current = sections.find(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 200; // Trigger when top of section is near the top of viewport
+        }
+        return false;
+      });
+      
+      if (current) {
+        setActiveSection(current);
+      }
+    };
 
-  useEffect(() => {
-    const sections = siteData.nav.map(n => n.href.slice(1));
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { rootMargin: '-20% 0px -60% 0px' }
-    );
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Trigger once on mount in case we start scrolled down
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
