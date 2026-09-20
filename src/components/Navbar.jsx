@@ -85,6 +85,7 @@ export default function Navbar() {
               <a
                 key={label}
                 href={href}
+                onClick={() => setActiveSection(href.slice(1))}
                 className={`relative text-sm font-heading font-semibold tracking-wide transition-colors duration-200 pb-1 whitespace-nowrap ${
                   isActive
                     ? 'text-cyan-700 dark:text-primary-container'
@@ -190,7 +191,10 @@ export default function Navbar() {
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.05 }}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    setActiveSection(href.slice(1));
+                    setMobileOpen(false);
+                  }}
                   className={`py-2.5 px-3 rounded-lg text-sm font-heading font-semibold transition-colors ${
                     activeSection === href.slice(1)
                       ? 'text-cyan-700 dark:text-primary-container bg-cyan-50 dark:bg-surface-container'
