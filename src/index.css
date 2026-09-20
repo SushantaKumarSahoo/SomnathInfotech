@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Fonts are loaded via index.html <link> tags for reliable loading */
+
+/* ===== Custom Theme Variables ===== */
+@theme {
+  --color-primary: #c3f5ff;
+  --color-surface: #0f131b;
+  --color-on-secondary-container: #b0b2ff;
+  --color-surface-bright: #353941;
+  --color-surface-container-high: #262a32;
+  --color-on-surface: #dfe2ed;
+  --color-tertiary-container: #71deff;
+  --color-on-primary-container: #00626e;
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-surface-variant: #31353d;
+  --color-primary-container: #00e5ff;
+  --color-surface-dim: #0f131b;
+  --color-tertiary: #cff2ff;
+  --color-primary-fixed: #9cf0ff;
+  --color-on-secondary: #1000a9;
+  --color-surface-container-lowest: #0a0e15;
+  --color-on-background: #dfe2ed;
+  --color-on-primary: #00363d;
+  --color-secondary-container: #3131c0;
+  --color-surface-container-low: #181c23;
+  --color-primary-fixed-dim: #00daf3;
+  --color-background: #0f131b;
+  --color-secondary: #c0c1ff;
+  --color-surface-container-highest: #31353d;
+  --color-surface-container: #1c2027;
+  --color-on-tertiary: #003642;
+  --color-inverse-surface: #dfe2ed;
+  --color-on-surface-variant: #bac9cc;
+  --color-outline-variant: #3b494c;
+  --color-surface-tint: #00daf3;
+  --color-on-error: #690005;
+  --color-outline: #849396;
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+::selection {
+  background-color: rgba(0, 229, 255, 0.3);
+  color: white;
+}
+
+/* ===== Font Families ===== */
+.font-display {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.font-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== Material Symbols ===== */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* ===== Tech Grid Background ===== */
+.tech-grid-bg {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.dark .tech-grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ===== Glow Effects ===== */
+.ambient-glow-cyan {
+  box-shadow: 0 0 35px -5px rgba(2, 132, 199, 0.35);
+}
+.dark .ambient-glow-cyan {
+  box-shadow: 0 0 35px -5px rgba(0, 229, 255, 0.3);
+}
+
+/* ===== Animations ===== */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+.pulse-glow-anim {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f131b;
+}
+::-webkit-scrollbar-thumb {
+  background: #31353d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b494c;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
