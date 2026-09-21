@@ -9,6 +9,19 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  const scrollToSection = (e, id) => {
+    if (e) e.preventDefault();
+    setActiveSection(id);
+    setMobileOpen(false);
+    
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -50,7 +63,11 @@ export default function Navbar() {
         
         {/* Left: Brand & Status */}
         <div className="flex items-center gap-4 xl:gap-6 shrink-0">
-          <a href="#home" className="flex items-center gap-2 sm:gap-3 group transition-all duration-200 active:scale-95">
+          <a 
+            href="#home" 
+            onClick={(e) => scrollToSection(e, 'home')}
+            className="flex items-center gap-2 sm:gap-3 group transition-all duration-200 active:scale-95"
+          >
             <motion.img
               whileHover={{ rotate: 5 }}
               alt="Somnath Infotech Logo"
@@ -88,7 +105,7 @@ export default function Navbar() {
               <a
                 key={label}
                 href={href}
-                onClick={() => setActiveSection(href.slice(1))}
+                onClick={(e) => scrollToSection(e, href.slice(1))}
                 className={`relative text-sm font-heading font-semibold tracking-wide transition-colors duration-200 pb-1 whitespace-nowrap ${
                   isActive
                     ? 'text-cyan-700 dark:text-primary-container'
@@ -159,6 +176,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             href="#contact"
+            onClick={(e) => scrollToSection(e, 'contact')}
             className="hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-cyan-600 to-sky-600 dark:from-primary-container dark:to-tertiary-container text-white dark:text-on-primary-container text-sm font-heading font-bold shadow-md shadow-cyan-600/20 dark:shadow-primary-container/30 hover:brightness-110 transition-all"
           >
             <span>Get a Quote</span>
@@ -194,10 +212,7 @@ export default function Navbar() {
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.05 }}
-                  onClick={() => {
-                    setActiveSection(href.slice(1));
-                    setMobileOpen(false);
-                  }}
+                  onClick={(e) => scrollToSection(e, href.slice(1))}
                   className={`py-2.5 px-3 rounded-lg text-sm font-heading font-semibold transition-colors ${
                     activeSection === href.slice(1)
                       ? 'text-cyan-700 dark:text-primary-container bg-cyan-50 dark:bg-surface-container'
@@ -209,7 +224,7 @@ export default function Navbar() {
               ))}
               <a
                 href="#contact"
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => scrollToSection(e, 'contact')}
                 className="mt-2 flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-cyan-600 to-sky-600 dark:from-primary-container dark:to-tertiary-container text-white dark:text-on-primary-container text-sm font-heading font-bold shadow-md"
               >
                 Get a Quote
